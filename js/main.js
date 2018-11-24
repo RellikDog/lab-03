@@ -60,7 +60,7 @@ Horns.prototype.render = function() {
 
 }
 
-function readJson () {
+function readJson1 () {
 
   $.get('data/page-1.json', 'json')
 
@@ -86,7 +86,36 @@ function readJson () {
 
 }
 
-$(() => readJson());
+$(() => readJson1());
+
+
+function readJson2 () {
+
+  $.get('data/page-2.json', 'json')
+
+    .then(data => {
+
+      data.forEach(hornsObj => {
+
+        new Horns(hornsObj);
+
+      })
+
+    })
+
+    .then(function() {
+
+      hornsGallery.forEach(horns =>{
+
+        horns.render();
+
+      })
+
+    })
+
+}
+
+
 
 //
 
