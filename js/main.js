@@ -12,7 +12,7 @@ let getArray = [];
 
 let removeDupl = [];
 
-// const lim = removeDupl.length;
+let lim = removeDupl.length;
 
 // let hornsImg;
 
@@ -99,7 +99,7 @@ const popFilter = function() {
     if($.inArray(element, removeDupl) === -1) removeDupl.push(element);
 
   });
-
+  lim = removeDupl.length - 1;
   removeDupl = removeDupl[19];
 
   for(let i in removeDupl) {
