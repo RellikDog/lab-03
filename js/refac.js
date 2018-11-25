@@ -44,7 +44,6 @@ Horns.prototype.render2 = function(){
   var html    = template(context);
   $('main').append(html);
 }
-
 // first page
 function readJson1 () {
   $('#but1').show();
