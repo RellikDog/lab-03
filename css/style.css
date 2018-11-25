@@ -1,4 +1,4 @@
-div{
+/* main div{
 
     float: left;
 
@@ -14,4 +14,18 @@ div img{
 
     width: 100%;
 
-}
+} */
+ main div{
+     height: 400px;
+     width: 200px;
+ }
+ main{
+    height: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around; 
+ }
+ div img{
+     width: 100%;
+ }

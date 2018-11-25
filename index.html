@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-  <script src="js/main.js"></script>
+  
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script> -->
   </head>
 
@@ -24,14 +24,15 @@
     <div>
 
     <header>
-      <button onclick="$(() => readJson1());">Click me</button> 
+     
       <h1>The Gallery of Horns</h1>
       <select class="dropdown-menu" name="horn-picks">
 
         <option value="default">Select All Animals</option>
 
       </select>
-
+      <button id="but1" onclick="$(() => readJson2());">Moar Horns!</button>
+      <button id="but2" onclick="$(() => readJson1());">original horns</button> 
     </header>
 
     </div>
@@ -55,6 +56,8 @@
       &copy; 2018 Code Fellows
 
     </footer>
-
+    <script src="js/refac.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   </body>
 </html>
