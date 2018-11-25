@@ -8,15 +8,23 @@
 
   <head>
 
+
     <title>The Gallery of Horns</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script src="js/main.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+    <section>
+        <h2>{{title}}</h2>
+
+        <div><img src="" alt="">{{image}}</div>
+
+        <p>{{description}}</p>
+
+      </section>
+    </script>
   </head>
 
   <body>
@@ -30,7 +38,9 @@
 
         <option value="default">Select All Animals</option>
 
+
       </select>
+
 
     </header>
 
@@ -38,16 +48,6 @@
 
     <main>
 
-      <!-- <script id="entry-template" type="text/x-handlebars-template"> -->
-      <section id="photo-template">
-        <h2></h2>
-
-        <img src="" alt="">
-
-        <p></p>
-
-      </section>
-      <!-- </script>  -->
     </main>
   
     <footer>
@@ -57,4 +57,7 @@
     </footer>
 
   </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
 </html>
