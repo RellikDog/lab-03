@@ -13,7 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
   </head>
 
   <body>
@@ -21,26 +24,23 @@
     <div>
 
     <header>
-      
+     
       <h1>The Gallery of Horns</h1>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
-        <script id="entry-template" type="text/x-handlebars-template">
-
-
       <select class="dropdown-menu" name="horn-picks">
 
         <option value="default">Select All Animals</option>
 
       </select>
-
+      <button id="but1" onclick="$(() => readJson2());">Moar Horns!</button>
+      <button id="but2" onclick="$(() => readJson1());">Original horns</button> 
     </header>
 
     </div>
 
     <main>
 
+      <!-- <script id="entry-template" type="text/x-handlebars-template"> -->
       <section id="photo-template">
-
         <h2></h2>
 
         <img src="" alt="">
@@ -48,23 +48,23 @@
         <p></p>
 
       </section>
-
+      <!-- </script>  -->
     </main>
-    </script>
-    
-
+  
     <footer>
 
       &copy; 2018 Code Fellows
 
     </footer>
-
+    <script id="tempi" type="text/x-handlebars-template">
+    <div {{{keyword2}}}>
+      <h2>{{title}}</h2>
+      {{{img}}}
+      <p>{{description}}</p>
+    </div>
+    </script>
+    <script src="js/refac.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   </body>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-
-  crossorigin="anonymous"></script>
-
-  <script src="js/main.js"></script>
-
 </html>

@@ -2,11 +2,11 @@
 
 //render pics to page
 
-const hornsGallery = [];
+var hornsGallery = [];
 
-const keywords = [];
+var keywords = [];
 
-const keywordsFinal = [];
+var keywordsFinal = [];
 
 let getArray = [];
 
@@ -15,26 +15,36 @@ let removeDupl = [];
 let lim = removeDupl.length;
 
 // let hornsImg;
-
+const popFilter2 = function(){
+  for(var i = 0; i < keywords.length; i++){
+    if(keywordsFinal.indexOf(keywords[i])=== -1){
+      keywordsFinal.push(keywords[i]);
+    }
+  }
+  for(let i in keywordsFinal){
+    $('.dropdown-menu').append(`<option value="${keywordsFinal[i]}">${keywordsFinal[i]}</option>`);
+  }
+}
 //
 
 function Horns(obj) {
 
   this.title = obj.title;
 
-  this.image_url = obj.image_url;
+  this.img=`<img src="${obj.image_url}">`;
 
   this.description = obj.description;
-
   this.keyword = obj.keyword;
+
+  this.keyword2 =`class ="${obj.keyword}"`;
 
   hornsGallery.push(this);
 
-  keywords.push(obj.keyword);
+  keywords.push(this.keyword);
 
-  keywordsFinal.push([ ...new Set(keywords)]);
+  // keywordsFinal.push([ ...new Set(keywords)]);
 
-  localStorage.setItem('keys', JSON.stringify(keywordsFinal));
+  // localStorage.setItem('keys', JSON.stringify(keywordsFinal));
 
 }
 
@@ -60,8 +70,23 @@ Horns.prototype.render = function() {
 
 }
 
-function readJson () {
+Horns.prototype.render2 = function(){
+  var source   = document.getElementById('tempi').innerHTML;
+  var template = Handlebars.compile(source);
 
+  var context = this;
+  var html    = template(context);
+  $('main').append(html);
+}
+
+function readJson1 () {
+
+  $('#but1').show();
+  $('#but2').hide();
+  $('main div').hide();
+  hornsGallery = [];
+  keywords = [];
+  keywordsFinal = [];
   $.get('data/page-1.json', 'json')
 
     .then(data => {
@@ -78,48 +103,81 @@ function readJson () {
 
       hornsGallery.forEach(horns =>{
 
-        horns.render();
+        horns.render2();
+
+      })
+      popFilter2();
+    })
+}
+
+$(() => readJson1());
+
+
+function readJson2 () {
+  $('#but1').hide();
+  $('#but2').show();
+  $('main div').hide();
+  hornsGallery = [];
+  keywords = [];
+  keywordsFinal = [];
+  getArray = [];
+  removeDupl = [];
+  $.get('data/page-2.json', 'json')
+
+    .then(data => {
+
+      data.forEach(hornsObj => {
+
+        new Horns(hornsObj);
 
       })
 
     })
 
+    .then(function() {
+
+      hornsGallery.forEach(horns =>{
+
+        horns.render2();
+
+      })
+      popFilter2();
+    })
 }
 
-$(() => readJson());
+
 
 //
 
-const popFilter = function() {
+// const popFilter = function() {
 
-  getArray = JSON.parse(localStorage.getItem('keys'));
+//   getArray = JSON.parse(localStorage.getItem('keys'));
 
-  $.each(getArray, function(index, element){ //From stack overflow
+//   $.each(getArray, function(index, element){ //From stack overflow
 
-    if($.inArray(element, removeDupl) === -1) removeDupl.push(element);
+//     if($.inArray(element, removeDupl) === -1) removeDupl.push(element);
 
-  });
-  lim = removeDupl.length - 1;
-  removeDupl = removeDupl[19];
+//   });
+//   lim = removeDupl.length - 1;
+//   removeDupl = removeDupl[19];
 
-  for(let i in removeDupl) {
+//   for(let i in removeDupl) {
 
-    $('.dropdown-menu').append( '<option value="'+removeDupl[i]+'">'+removeDupl[i]+'</option>' );
+//     $('.dropdown-menu').append( '<option value="'+removeDupl[i]+'">'+removeDupl[i]+'</option>' );
 
-  }
+//   }
 
-}
+// }
 
-getArray = JSON.parse(localStorage.getItem('keys'));
+// getArray = JSON.parse(localStorage.getItem('keys'));
 
-//add button to hide all pics but ones with selected data types
+// //add button to hide all pics but ones with selected data types
 
-popFilter();
+// popFilter();
 
 //selecting box filtering
 
 $('select[name="horn-picks"]').on('change', function() {
-
   if($(this).val() === 'default'){
 
     $('main div').show()
@@ -136,17 +194,11 @@ $('select[name="horn-picks"]').on('change', function() {
 
   }
 
-})
-
-
-
-var names = ['Mike','Matt','Nancy','Adam','Jenny','Nancy','Carl'];
-
-var uniqueNames = [];
-
-$.each(names, function(i, el){
-
-  if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-
 });
 
+// //make button(
+// var makeButt = function(){
+//   let butt = $('<button type="button"> more horns  </button>').html();
+//   $('header').append(butt);
+// }
+// makeButt();
