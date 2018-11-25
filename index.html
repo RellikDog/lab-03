@@ -14,8 +14,14 @@
 <header>
   <h1>The Gallery of Horns</h1>
   <select class="dropdown-menu" name="horn-picks">
-  <option value="default">Select All Animals</option>
+    <option value="default">Select All Animals</option>
   </select>
+  <select class="sort-menu" name="sorter">
+    <option value="default">Sort by # of Horns</option>
+    <option value="Small to Large">Smallest to Largest</option>
+    <option value="Large to Small">Largest to Smallest</option>
+  </select>
+ 
     <button id="but1" onclick="$(() => readJson2());">Moar Horns!</button>
     <button id="but2" onclick="$(() => readJson1());">Original horns</button> 
 </header>
