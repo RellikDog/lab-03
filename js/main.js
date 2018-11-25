@@ -31,11 +31,12 @@ function Horns(obj) {
 
   this.title = obj.title;
 
-  this.image_url = obj.image_url;
+  this.img=`<img src="${obj.image_url}">`;
 
   this.description = obj.description;
-
   this.keyword = obj.keyword;
+
+  this.keyword2 =`class ="${obj.keyword}"`;
 
   hornsGallery.push(this);
 
@@ -69,6 +70,15 @@ Horns.prototype.render = function() {
 
 }
 
+Horns.prototype.render2 = function(){
+  var source   = document.getElementById('tempi').innerHTML;
+  var template = Handlebars.compile(source);
+
+  var context = this;
+  var html    = template(context);
+  $('main').append(html);
+}
+
 function readJson1 () {
 
   $('#but1').show();
@@ -93,7 +103,7 @@ function readJson1 () {
 
       hornsGallery.forEach(horns =>{
 
-        horns.render();
+        horns.render2();
 
       })
       popFilter2();
@@ -128,7 +138,7 @@ function readJson2 () {
 
       hornsGallery.forEach(horns =>{
 
-        horns.render();
+        horns.render2();
 
       })
       popFilter2();
