@@ -16,9 +16,10 @@ const popFilter2 = function(){
 //constructor func for data
 function Horns(obj) {
   this.title = obj.title;
-  this.image_url = obj.image_url;
+  this.img=`<img src="${obj.image_url}">`;
   this.description = obj.description;
   this.keyword = obj.keyword;
+  this.keyword2 =`class ="${obj.keyword}"`;
   hornsGallery.push(this);
   keywords.push(this.keyword);
 }
@@ -34,6 +35,16 @@ Horns.prototype.render = function() {
   $clone.removeClass('clone');
   $clone.attr('class', this.keyword);
 }
+//render2
+Horns.prototype.render2 = function(){
+  var source   = document.getElementById('tempi').innerHTML;
+  var template = Handlebars.compile(source);
+
+  var context = this;
+  var html    = template(context);
+  $('main').append(html);
+}
+
 // first page
 function readJson1 () {
   $('#but1').show();
@@ -50,7 +61,7 @@ function readJson1 () {
     })
     .then(function() {
       hornsGallery.forEach(horns =>{
-        horns.render();
+        horns.render2();
       })
       popFilter2();
     })
@@ -72,7 +83,7 @@ function readJson2 () {
     })
     .then(function() {
       hornsGallery.forEach(horns =>{
-        horns.render();
+        horns.render2();
       })
       popFilter2();
     })
@@ -83,9 +94,9 @@ $('select[name="horn-picks"]').on('change', function() {
     $('main div').show()
   } else{
     let $selection = $(this).val();
-    $('main div').hide()
-    $(`div[class="${$selection}"]`).show()
-    console.log($(this).val())
+    $('main div').hide();
+    $(`div[class="${$selection}"]`).show();
+    console.log($(this).val());
   }
 });
 
