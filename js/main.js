@@ -16,8 +16,6 @@ let lim = removeDupl.length;
 
 // let hornsImg;
 
-//
-
 function Horns(obj) {
 
   this.title = obj.title;
@@ -60,7 +58,7 @@ Horns.prototype.render = function() {
 
 }
 
-function readJson1 () {
+function readJson () {
 
   $.get('data/page-1.json', 'json')
 
@@ -86,57 +84,26 @@ function readJson1 () {
 
 }
 
-$(() => readJson1());
-
-
-function readJson2 () {
-
-  $.get('data/page-2.json', 'json')
-
-    .then(data => {
-
-      data.forEach(hornsObj => {
-
-        new Horns(hornsObj);
-
-      })
-
-    })
-
-    .then(function() {
-
-      hornsGallery.forEach(horns =>{
-
-        horns.render();
-
-      })
-
-    })
-
-}
-
-
-
-//
+$(() => readJson());
 
 const popFilter = function() {
 
   getArray = JSON.parse(localStorage.getItem('keys'));
-
   $.each(getArray, function(index, element){ //From stack overflow
 
     if($.inArray(element, removeDupl) === -1) removeDupl.push(element);
 
   });
   lim = removeDupl.length - 1;
-  removeDupl = removeDupl[19];
+  removeDupl = removeDupl[lim]; //Assigns value of last array in iteration
 
   for(let i in removeDupl) {
 
-    $('.dropdown-menu').append( '<option value="'+removeDupl[i]+'">'+removeDupl[i]+'</option>' );
+    let option = '<option value="'+removeDupl[i]+'">'+removeDupl[i]+'</option>' ;
+    $('.dropdown-menu').append(option);
 
   }
-
+ 
 }
 
 getArray = JSON.parse(localStorage.getItem('keys'));
@@ -148,34 +115,25 @@ popFilter();
 //selecting box filtering
 
 $('select[name="horn-picks"]').on('change', function() {
-
   if($(this).val() === 'default'){
-
     $('main div').show()
-
   } else{
-
     let $selection = $(this).val();
-
     $('main div').hide()
-
     $(`div[class="${$selection}"]`).show()
-
-    console.log($(this).val())
-
   }
-
 })
 
+Horns.prototype.toHtml = function() {
+
+  let templateHtml = $('#entry-template').html()
+  let hornsTemplate = Handlebars.compile(templateHtml);
+  let newHorns = hornsTemplate(this);
+  console.log(newHorns);
+  return newHorns;
+
+};
 
 
-var names = ['Mike','Matt','Nancy','Adam','Jenny','Nancy','Carl'];
 
-var uniqueNames = [];
-
-$.each(names, function(i, el){
-
-  if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-
-});
 
