@@ -7,8 +7,6 @@ let getArray = [];
 let removeDupl = [];
 let lim = removeDupl.length;
 
-// let hornsImg;
-
 const popFilter2 = function(){
   for(var i = 0; i < keywords.length; i++){
     if(keywordsFinal.indexOf(keywords[i])=== -1){
@@ -26,12 +24,9 @@ function Horns(obj) {
   this.description = obj.description;
   this.keyword = obj.keyword;
   this.keyword2 =`class ="${obj.keyword}"`;
+  this.horns = obj.horns;
   hornsGallery.push(this);
   keywords.push(this.keyword);
-
-// keywordsFinal.push([ ...new Set(keywords)]);
-
-// localStorage.setItem('keys', JSON.stringify(keywordsFinal));
 }
 
 Horns.prototype.render = function() {
@@ -46,8 +41,6 @@ Horns.prototype.render = function() {
   $clone.attr('class', this.keyword);
 }
 
-
-
 Horns.prototype.render2 = function(){
   var source   = document.getElementById('tempi').innerHTML;
   var template = Handlebars.compile(source);
@@ -56,8 +49,6 @@ Horns.prototype.render2 = function(){
   $('main').append(html);
 
 }
-
-
 
 function readJson1 () {
   $('#but1').show();
@@ -81,7 +72,6 @@ function readJson1 () {
   }
 
 $(() => readJson1());
-
 
 function readJson2 () {
   $('#but1').hide();
@@ -114,7 +104,16 @@ $('select[name="horn-picks"]').on('change', function() {
     let $selection = $(this).val();
     $('main div').hide()
     $(`div[class="${$selection}"]`).show()
-    console.log($(this).val())
   }
 
 });
+
+const sortByHorns = (a, b) => {
+  if (a.horns < b.horns)
+    return -1; 
+    
+  if (a.horns > b.horns) 
+    return 1; 
+    return 0; 
+  
+}

@@ -2,6 +2,7 @@
 var hornsGallery = [];
 var keywords = [];
 var keywordsFinal = [];
+
 //make filters func
 const popFilter2 = function(){
   for(var i = 0; i < keywords.length; i++){
@@ -20,6 +21,7 @@ function Horns(obj) {
   this.description = obj.description;
   this.keyword = obj.keyword;
   this.keyword2 =`class ="${obj.keyword}"`;
+  this.horns = obj.horns;
   hornsGallery.push(this);
   keywords.push(this.keyword);
 }
@@ -95,7 +97,41 @@ $('select[name="horn-picks"]').on('change', function() {
     let $selection = $(this).val();
     $('main div').hide();
     $(`div[class="${$selection}"]`).show();
-    console.log($(this).val());
   }
 });
+
+const sortHornsBySmlLrg = (a, b) => {
+  if (a.horns < b.horns)
+    return -1; 
+    
+  if (a.horns > b.horns) 
+    return 1; 
+    return 0;
+    
+}
+
+const sortHornsByLrgSml = (a, b) => {
+  if (a.horns > b.horns)
+    return -1; 
+    
+  if (a.horns < b.horns) 
+    return 1; 
+    return 0;
+    
+}
+
+$('.sort-menu').on('change', function() {
+  if( this.value === "Small to Large") {
+    const hornsGallerySort = hornsGallery.sort(sortHornsBySmlLrg);
+    hornsGallery = hornsGallerySort;
+    readJson1();
+    $(() => readJson1());
+  }
+  else if(this.value === "Large to Small") {
+    const hornsGallerySort = hornsGallery.sort(sortHornsByLrgSml);
+    hornsGallery = hornsGallerySort;
+    readJson1();
+    $(() => readJson1());
+  }
+})
 
