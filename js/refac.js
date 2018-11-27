@@ -128,7 +128,7 @@ const sortHornsByLrgSml = arr => {
 
 $('.sort-menu').on('change', function() {
   if($(this).val() === 'default'){
-    location.reload();
+    location.reload(); //Reloads page
   } 
    else if( this.value === "Small to Large") {
     const hornsGallerySort = sortHornsBySmlLrg(hornsGallery);
