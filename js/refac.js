@@ -127,9 +127,12 @@ const sortHornsByLrgSml = arr => {
 }
 
 $('.sort-menu').on('change', function() {
-  if( this.value === "Small to Large") {
+  if($(this).val() === 'default'){
+    location.reload();
+  } 
+   else if( this.value === "Small to Large") {
     const hornsGallerySort = sortHornsBySmlLrg(hornsGallery);
-    $('main div').empty();
+    $('main div').remove();
     hornsGallerySort.forEach(horns =>{
       horns.render2();
     })
@@ -137,7 +140,7 @@ $('.sort-menu').on('change', function() {
   }
   else if(this.value === "Large to Small") {
     const hornsGallerySort = sortHornsByLrgSml(hornsGallery);
-    $('main div').empty();
+    $('main div').remove();
     hornsGallerySort.forEach(horns =>{
       horns.render2();
     })
