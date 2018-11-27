@@ -1,5 +1,7 @@
 'use strict';
 var hornsGallery = [];
+var context = [];
+var html = [];
 var keywords = [];
 var keywordsFinal = [];
 
@@ -41,9 +43,8 @@ Horns.prototype.render = function() {
 Horns.prototype.render2 = function(){
   var source   = document.getElementById('tempi').innerHTML;
   var template = Handlebars.compile(source);
-
-  var context = this;
-  var html    = template(context);
+  context = this;
+  html = template(context);
   $('main').append(html);
 }
 // first page
@@ -100,7 +101,8 @@ $('select[name="horn-picks"]').on('change', function() {
   }
 });
 
-const sortHornsBySmlLrg = (a, b) => {
+const sortHornsBySmlLrg = arr => {
+  return arr.sort(function(a,b) {
   if (a.horns < b.horns)
     return -1; 
     
@@ -108,9 +110,11 @@ const sortHornsBySmlLrg = (a, b) => {
     return 1; 
     return 0;
     
+})
 }
 
-const sortHornsByLrgSml = (a, b) => {
+const sortHornsByLrgSml = arr => {
+  return arr.sort(function(a,b) {
   if (a.horns > b.horns)
     return -1; 
     
@@ -118,20 +122,25 @@ const sortHornsByLrgSml = (a, b) => {
     return 1; 
     return 0;
     
+})
 }
 
 $('.sort-menu').on('change', function() {
   if( this.value === "Small to Large") {
-    const hornsGallerySort = hornsGallery.sort(sortHornsBySmlLrg);
-    hornsGallery = hornsGallerySort;
-    readJson1();
-    $(() => readJson1());
+    const hornsGallerySort = sortHornsBySmlLrg(hornsGallery);
+    $('main div').empty();
+    hornsGallerySort.forEach(horns =>{
+      horns.render2();
+    })
+    popFilter2();
   }
   else if(this.value === "Large to Small") {
-    const hornsGallerySort = hornsGallery.sort(sortHornsByLrgSml);
-    hornsGallery = hornsGallerySort;
-    readJson1();
-    $(() => readJson1());
+    const hornsGallerySort = sortHornsByLrgSml(hornsGallery);
+    $('main div').empty();
+    hornsGallerySort.forEach(horns =>{
+      horns.render2();
+    })
+    popFilter2();
   }
 })
 
