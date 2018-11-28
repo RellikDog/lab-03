@@ -138,7 +138,7 @@ $('.sort-menu').on('change', function() {
     })
     popFilter2();
   }
-  else if(this.value === "Large to Small") {
+  else {
     const hornsGallerySort = sortHornsByLrgSml(hornsGallery);
     $('main div').remove();
     hornsGallerySort.forEach(horns =>{
