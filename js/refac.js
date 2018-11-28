@@ -1,7 +1,10 @@
 'use strict';
 var hornsGallery = [];
+var context = [];
+var html = [];
 var keywords = [];
 var keywordsFinal = [];
+
 //make filters func
 const popFilter2 = function(){
   for(var i = 0; i < keywords.length; i++){
@@ -20,6 +23,7 @@ function Horns(obj) {
   this.description = obj.description;
   this.keyword = obj.keyword;
   this.keyword2 =`class ="${obj.keyword}"`;
+  this.horns = obj.horns;
   hornsGallery.push(this);
   keywords.push(this.keyword);
 }
@@ -39,9 +43,8 @@ Horns.prototype.render = function() {
 Horns.prototype.render2 = function(){
   var source   = document.getElementById('tempi').innerHTML;
   var template = Handlebars.compile(source);
-
-  var context = this;
-  var html    = template(context);
+  context = this;
+  html = template(context);
   $('main').append(html);
 }
 // first page
@@ -95,7 +98,52 @@ $('select[name="horn-picks"]').on('change', function() {
     let $selection = $(this).val();
     $('main div').hide();
     $(`div[class="${$selection}"]`).show();
-    console.log($(this).val());
   }
 });
+
+const sortHornsBySmlLrg = arr => {
+  return arr.sort(function(a,b) {
+  if (a.horns < b.horns)
+    return -1; 
+    
+  if (a.horns > b.horns) 
+    return 1; 
+    return 0;
+    
+})
+}
+
+const sortHornsByLrgSml = arr => {
+  return arr.sort(function(a,b) {
+  if (a.horns > b.horns)
+    return -1; 
+    
+  if (a.horns < b.horns) 
+    return 1; 
+    return 0;
+    
+})
+}
+
+$('.sort-menu').on('change', function() {
+  if($(this).val() === 'default'){
+    location.reload(); //Reloads page
+  } 
+   else if( this.value === "Small to Large") {
+    const hornsGallerySort = sortHornsBySmlLrg(hornsGallery);
+    $('main div').remove();
+    hornsGallerySort.forEach(horns =>{
+      horns.render2();
+    })
+    popFilter2();
+  }
+  else {
+    const hornsGallerySort = sortHornsByLrgSml(hornsGallery);
+    $('main div').remove();
+    hornsGallerySort.forEach(horns =>{
+      horns.render2();
+    })
+    popFilter2();
+  }
+})
 
