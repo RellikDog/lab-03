@@ -4,11 +4,13 @@ var keywords = [];
 var keywordsFinal = [];
 //make filters func
 const popFilter2 = function(){
+  $('select option').remove();
   for(var i = 0; i < keywords.length; i++){
     if(keywordsFinal.indexOf(keywords[i])=== -1){
       keywordsFinal.push(keywords[i]);
     }
   }
+  $('.dropdown-menu').append(`<option value="default">Select All Animals</option>`);
   for(let i in keywordsFinal){
     $('.dropdown-menu').append(`<option value="${keywordsFinal[i]}">${keywordsFinal[i]}</option>`);
   }
@@ -19,6 +21,7 @@ function Horns(obj) {
   this.img=`<img src="${obj.image_url}">`;
   this.description = obj.description;
   this.keyword = obj.keyword;
+  this.horns = obj.horns;
   this.keyword2 =`class ="${obj.keyword}"`;
   hornsGallery.push(this);
   keywords.push(this.keyword);
@@ -98,4 +101,29 @@ $('select[name="horn-picks"]').on('change', function() {
     console.log($(this).val());
   }
 });
+//sort by hornsw
 
+function sortByHorns(){
+  console.log('Y!');
+  hideMe();
+  console.log('U');
+  hornsGallery.sort((a, b) => {
+    if(a.horns > b.horns){
+      console.log('bump');
+      return 1;
+    }else if(a.horns < b.horns){
+      console.log('roll');
+      return -1;
+    }else{
+      console.log('YYY');
+      return 0;
+    }
+  });
+  hornsGallery.forEach(horns =>{
+    horns.render2();
+  });
+}
+
+function hideMe(){
+  $('main div').remove();
+}
