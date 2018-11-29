@@ -7,11 +7,13 @@ var keywordsFinal = [];
 
 //make filters func
 const popFilter2 = function(){
+  $('.dropdown-menu option').remove();
   for(var i = 0; i < keywords.length; i++){
     if(keywordsFinal.indexOf(keywords[i])=== -1){
       keywordsFinal.push(keywords[i]);
     }
   }
+  $('.dropdown-menu').append(`<option value="default">Select All Animals</option>`);
   for(let i in keywordsFinal){
     $('.dropdown-menu').append(`<option value="${keywordsFinal[i]}">${keywordsFinal[i]}</option>`);
   }
